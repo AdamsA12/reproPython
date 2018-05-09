@@ -3,7 +3,7 @@
 Module contaning the functions to visualize the 
 wines distribution using a subset data
 """
-
+import os
 import sys
 import datetime
 
@@ -50,9 +50,13 @@ def plot_distribution(wine):
     ax.set_ylabel('Probability density')
     ax.set_xlabel('Points');
 
-    fname = f'figures/fig01_distribution-wine-scores.png'
-
-    fig.savefig(fname, bbox_inches = 'tight')
+    fname = f'figures/fig02_scatter-points-vs-price.png'
+    try:
+        fig.savefig(fname, bbox_inches = 'tight')
+    except OSError as e:
+        os.makedirs('figures')
+        print("Creating figures dir")
+        fig.savefig(fname, bbox_inches='tight')
     return (fname)
 
 
@@ -64,9 +68,14 @@ def plot_scatter(wine):
     ax.set_title('Scatter wine points vs price')
     ax.set_ylabel('Price USD')
     ax.set_xlabel('Points')
-
+    
     fname = f'figures/fig02_scatter-points-vs-price.png'
-    fig.savefig(fname, bbox_inches = 'tight')
+    try:
+        fig.savefig(fname, bbox_inches = 'tight')
+    except OSError as e:
+        os.makedirs('figures')
+        print("Creating figures dir")
+        fig.savefig(fname, bbox_inches='tight')
     return (fname)
 
 
